@@ -10,6 +10,9 @@ namespace Unity.VRTemplate
     /// </summary>
     public class DropdownMgr : MonoBehaviour
     {
+        [SerializeField]
+        public TMP_Dropdown currDropdown;
+        
         [Serializable]
         class Step
         {
@@ -20,11 +23,14 @@ namespace Unity.VRTemplate
         [SerializeField]
         List<Step> m_StepList = new List<Step>();
 
-        public void OptionA()
+        public void ChangeOption()
         {
-            m_StepList[0].stepObject.SetActive(true);
-            m_StepList[1].stepObject.SetActive(false);
-            m_StepList[2].stepObject.SetActive(false);
+            int currIndex = currDropdown.value;
+
+            foreach (Step image in m_StepList){
+                image.stepObject.SetActive(false);
+            }
+            m_StepList[currIndex].stepObject.SetActive(true);
         }
     }
 }
